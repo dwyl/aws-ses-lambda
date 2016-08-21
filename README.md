@@ -10,5 +10,14 @@ curl -H "Content-Type: application/json" -X POST -d '{"email":"rorry@email.net"}
 
 Or testing against our Heroku endpoint:
 ```sh
-curl -H "Content-Type: application/json" -X POST -d '{"email":"rorry@email.net"}' https://aws-ses-bounce.herokuapp.com/bounce
+curl -H "Content-Type: application/json" -X POST -d '{"email":"my.test@email.net"}' https://aws-ses-bounce.herokuapp.com/bounce
+```
+
+
+JSON test message:
+```js
+{
+"default": "{\"email\":\"sns.test.email@aws.test\"}",
+"https": "{\"email\":\"sns.test.email@aws.test\"}"
+}
 ```
