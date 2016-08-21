@@ -17,17 +17,17 @@ server.register({ // register all your plugins
 });
 
 server.route({
-	method: 'GET',
+	method: '*',
 	path: '/bounce',
 	handler: function(request, reply) {
+    console.log(request.payload);
 
 const insert = `
 INSERT INTO bounces (email)
 VALUES ( $1 );
 `
-const email = 'rory@bouncy.bounce';
 
-    request.pg.client.query(insert, [email], function(err, result) {
+    request.pg.client.query(insert, [request.payload.email], function(err, result) {
     console.log(err, result);
     return reply(email);
     });
