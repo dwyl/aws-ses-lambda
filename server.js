@@ -26,8 +26,8 @@ const insert = `
 INSERT INTO bounces (email)
 VALUES ( $1 );
 `
-
-    request.pg.client.query(insert, [request.payload.email], function(err, result) {
+var email = request.payload.email || 'email.was.not.defined@sad.panda';
+    request.pg.client.query(insert, [email], function(err, result) {
     console.log(err, result);
     return reply(email);
     });
