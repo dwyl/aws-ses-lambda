@@ -1,0 +1,85 @@
+{
+  "name": "aws-ses-lambda",
+  "version": "1.0.0",
+  "description": "A complete solution for sending email via AWS SES using Lambda",
+  "main": "lib/index.js",
+  "scripts": {
+    "nocov": "node_modules/.bin/mocha test/*.test.js",
+    "test": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcov -- -R spec",
+    "deploy": "dpl",
+    "check-coverage": "npm test && node_modules/.bin/istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
+    "eslint": "semistandard  --verbose | snazzy"
+  },
+  "files_to_deploy": [
+    "index.js",
+    "package.json",
+    "lib/",
+    ".env"
+  ],
+  "lambda_memory": 512,
+  "lambda_timeout": 42,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwyl/aws-ses-lambda.git"
+  },
+  "keywords": [
+    "AWS",
+    "Amazon Web Services",
+    "SES",
+    "Simple Emal Service",
+    "Lambda",
+    "bounce checker",
+    "stat counter",
+    "Dynamo DB",
+    "Serverless"
+  ],
+  "author": "@nelsonic & Friends :-)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwyl/aws-ses-lambda/issues"
+  },
+  "homepage": "https://github.com/dwyl/aws-ses-lambda#readme",
+  "devDependencies": {
+    "aguid": "^1.0.4",
+    "aws-lambda-test-utils": "^1.0.2",
+    "decache": "^4.1.0",
+    "istanbul": "^0.4.5",
+    "tape": "^4.6.3"
+  },
+  "dependencies": {
+  	"dpl": "^3.7.1",
+    "aws-sdk": "^2.5.4",
+    "env2": "^2.1.1"
+  },
+  "semistandard": {
+    "rules": {
+      "no-multi-spaces": [
+        2,
+        {
+          "exceptions": {
+            "VariableDeclarator": true
+          }
+        }
+      ],
+      "brace-style": [
+        2,
+        "stroustrup",
+        {
+          "allowSingleLine": true
+        }
+      ],
+      "no-trailing-spaces": 0
+    },
+    "globals": [
+      "describe",
+      "it",
+      "before",
+      "after",
+      "afterEach"
+    ]
+  },
+  "pre-commit": [
+    "eslint",
+    "check-coverage"
+  ]
+}
