@@ -1,11 +1,24 @@
 # AWS SES Lambda
 
+Amazon Web Services Simple Email Service Lambda Function(s)
+
 ## _Why_?
 
+We send (_and receive_) a lot of email
+for both @dwyl products
+and client projects.
 
+We need a simple, scalable & maintainable way of sending email,
+and _most importantly_ we needed to _**know** with **certainty**_:
 
-> **Note**: all the same reasons ***Why*** that apply in "sendemail"
-(_the pre-cursor to this project_) apply here.
++ Are our emails being ***delivered successfully***?
++ How many emails are ***bouncing***?
++ Are we **re-sending email** to addresses that have "***bounced***"? (_i.e. wasting money?!_)
++ Are people ***opening*** / ***reading*** the email?
++ Do people ***engage*** with the **content** of the email?
+
+> **Note**: all the same reasons ***Why*** that apply to `sendemail` <br />
+(_the pre-cursor to this project_) apply here. <br />
 see: https://github.com/dwyl/sendemail#why
 
 
@@ -15,7 +28,39 @@ see: https://github.com/dwyl/sendemail#why
 
 ### Features / Requirements
 
+Each time an email is sent using the `aws-ses-lambda` 5 things happen:
 
+#### 1. Pre-Send Checks
+
++ Is the email address valid. (_basic checks to avoid wasting money_)
++ Check our records to see if the email address we are attempting to
+send to has bounced in the past.
+
+#### 2. Send the Email
+
++ Send the email using AWS SES and keep a note of the unique ID confirming the email was sent.
+
+#### 3. Log Email Sent
+
++ Log all detail of the sent email to the Database
+
+#### 4. Query SES Bounce/Spam Info Service
+
++ Check which emails have bounced
+
+#### 5. Report Stats/Summary in Dashboard
+
++ update the Database with the send/receipt stats
+
+## Frequently Asked Questions (FAQ)
+
+#### Separate Lambda Functions or One Lambda with Independent Functions?
+
+From _experience_ making distinct functions _separate_ lambda functions,
+just increases our cost without any discernible benefit.
+
+Having separate lambdas when we _know_ that all functionality is executed
+each time
 
 aws-ses-bounce-checker periodically retrieves stats on outbound emails from SES.
 These include bounce rates and whether an email has been opened.
