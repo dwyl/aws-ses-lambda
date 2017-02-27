@@ -212,7 +212,7 @@ our data is stored and encrypting all communication at all times.
 For the next few months we will be using AWS because it's "fit for purpose",
 and by building this as a Lambda that uses SES and exposes a simple API,
 we can _easily_ substitute it later when we move to our own infra.
-=======
+
 # aws-ses-bounce-checker :mailbox_with_mail:
 A tool to check if emails sent by SES have bounced.
 

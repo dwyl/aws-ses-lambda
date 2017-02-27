@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "aws-ses-lambda",
   "version": "1.0.0",
   "description": "A complete solution for sending email via AWS SES using Lambda",
@@ -9,13 +8,14 @@
     "test": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha --report lcov -- -R spec",
     "deploy": "dpl",
     "check-coverage": "npm test && node_modules/.bin/istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
-    "eslint": "semistandard  --verbose | snazzy"
+    "lint": "node_modules/.bin/goodparts lib"
   },
   "files_to_deploy": [
     "index.js",
     "package.json",
     "lib/",
-    ".env"
+    ".env",
+    "/templates"
   ],
   "lambda_memory": 512,
   "lambda_timeout": 42,
@@ -44,73 +44,18 @@
     "aguid": "^1.0.4",
     "aws-lambda-test-utils": "^1.0.2",
     "decache": "^4.1.0",
+    "goodparts": "^1.2.1",
     "istanbul": "^0.4.5",
     "tape": "^4.6.3"
   },
   "dependencies": {
-  	"dpl": "^3.7.1",
     "aws-sdk": "^2.5.4",
-    "env2": "^2.1.1"
-  },
-  "semistandard": {
-    "rules": {
-      "no-multi-spaces": [
-        2,
-        {
-          "exceptions": {
-            "VariableDeclarator": true
-          }
-        }
-      ],
-      "brace-style": [
-        2,
-        "stroustrup",
-        {
-          "allowSingleLine": true
-        }
-      ],
-      "no-trailing-spaces": 0
-    },
-    "globals": [
-      "describe",
-      "it",
-      "before",
-      "after",
-      "afterEach"
-    ]
+    "dpl": "^3.7.1",
+    "env2": "^2.1.1",
+    "sendemail": "^3.2.0"
   },
   "pre-commit": [
-    "eslint",
+    "lint",
     "check-coverage"
   ]
-=======
-  "name": "aws-ses-bounce-checker",
-  "version": "1.0.0",
-  "description": "AWS SES Bounce Email Checker",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dwyl/aws-ses-bounce-checker.git"
-  },
-  "keywords": [
-    "SES",
-    "Email",
-    "Bounce",
-    "Status"
-  ],
-  "author": "nelsonic <nodecoder@gmail.com> (https://github.com/nelsonic)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dwyl/aws-ses-bounce-checker/issues"
-  },
-  "homepage": "https://github.com/dwyl/aws-ses-bounce-checker#readme",
-  "dependencies": {
-    "hapi": "^14.2.0",
-    "hapi-postgres-connection": "^6.1.0"
-  }
->>>>>>> 0882d9d367f4482b502414d1ad136eca1fcf490e
 }
