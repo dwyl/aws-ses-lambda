@@ -1,4 +1,4 @@
-# AWS SES Lambda
+ AWS SES Lambda
 
 Amazon Web Services Simple Email Service Lambda Function(s)
 
@@ -212,3 +212,27 @@ our data is stored and encrypting all communication at all times.
 For the next few months we will be using AWS because it's "fit for purpose",
 and by building this as a Lambda that uses SES and exposes a simple API,
 we can _easily_ substitute it later when we move to our own infra.
+=======
+# aws-ses-bounce-checker :mailbox_with_mail:
+A tool to check if emails sent by SES have bounced.
+
+Test that POST-ing to the `/bounce` endpoint with a email address
+in the payload inserts into database:
+
+```sh
+curl -H "Content-Type: application/json" -X POST -d '{"email":"rorry@email.net"}' http://localhost:8000/bounce
+```
+
+Or testing against our Heroku endpoint:
+```sh
+curl -H "Content-Type: application/json" -X POST -d '{"email":"my.test@email.net"}' https://aws-ses-bounce.herokuapp.com/bounce
+```
+
+
+JSON test message:
+```js
+{
+"default": "{\"email\":\"sns.test.email@aws.test\"}",
+"https": "{\"email\":\"sns.test.email@aws.test\"}"
+}
+```

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "aws-ses-lambda",
   "version": "1.0.0",
   "description": "A complete solution for sending email via AWS SES using Lambda",
@@ -82,4 +83,34 @@
     "eslint",
     "check-coverage"
   ]
+=======
+  "name": "aws-ses-bounce-checker",
+  "version": "1.0.0",
+  "description": "AWS SES Bounce Email Checker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwyl/aws-ses-bounce-checker.git"
+  },
+  "keywords": [
+    "SES",
+    "Email",
+    "Bounce",
+    "Status"
+  ],
+  "author": "nelsonic <nodecoder@gmail.com> (https://github.com/nelsonic)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwyl/aws-ses-bounce-checker/issues"
+  },
+  "homepage": "https://github.com/dwyl/aws-ses-bounce-checker#readme",
+  "dependencies": {
+    "hapi": "^14.2.0",
+    "hapi-postgres-connection": "^6.1.0"
+  }
+>>>>>>> 0882d9d367f4482b502414d1ad136eca1fcf490e
 }
