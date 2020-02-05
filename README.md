@@ -36,7 +36,7 @@ Each time an email is sent using the `aws-ses-lambda` 5 things happen:
 + Check our records to see if the email address we are attempting to
 send to has bounced in the past.
 
-#### 2. Send the Email
+#### 2. Send Email
 
 + Send the email using AWS SES and keep a note of the unique ID confirming the email was sent.
 
@@ -57,7 +57,7 @@ send to has bounced in the past.
 #### Separate Lambda Functions or One Lambda with Independent Functions?
 
 From _experience_ making distinct functions _separate_ lambda functions,
-just increases our cost without any discernible benefit.
+just increases our cost/complexity without any discernible benefit.
 
 Having separate lambdas when we _know_ that all functionality is executed
 each time
@@ -105,8 +105,10 @@ someone `else` might consider adding_)
 There are _way_ more reasons _why_ we are handcrafting this app than
 the ones stated above. We see email as "_operationally strategic_",
 not merely "_transactional_". i.e. not something to be "_outsourced_"
-to a provider that "_takes care of everything_" for us.
+to a "black box" provider that "_takes care of everything_" for us.
+We want to have full control and deep insights into our email system.
 
+<!--
 ### Can't We "_Just Use SendGrid_" ?
 
 SendGrid have an _excellent_ product: https://sendgrid.com/solutions/
@@ -116,9 +118,10 @@ But it has a _high_ level of
 which we are _not_ fans of ...
 Yes, they have great Open Source libraries:
 https://sendgrid.com/docs/Integrate/libraries.html
-But their _entire_ business model is predicated on _reataining_
+But their _entire_ business model is predicated on _retaining_
 the people using their service so they don't make it _easy_ to leave.
 By contrast AWS don't make it _hard_ to leave ...
+
 
 #### To a "_Startup CTO_" SendGrid Pricing is _Compelling_
 
@@ -129,8 +132,8 @@ is to "***ship the product***" _not_ "_build the tools_" ...!
 see: https://sendgrid.com/pricing/
 ![sendgrid pricing](https://cloud.githubusercontent.com/assets/194400/22721501/0947ccfe-eda9-11e6-9381-61afbd307c0a.png)
 
-> What is ***$20 per month*** when even a
-**"_Junior_" Developer costs more than that**?!
+> What is ***$20 per month*** when even an hour of a
+**"_Junior_" Developer's time costs more than that**?!
 
 #### The Price of "_Success_"
 
@@ -150,7 +153,7 @@ Given that we will be charging people _considerably_ more than "_half a penny_"
 to use our product, the cost of email becomes "_moot_" ... _right_...?
 
 #### SendGrid Cost _Per Email_: [$924.95/2,000,000](http://www.wolframalpha.com/input/?i=$924.95%2F2,000,000) = _$0.000462475_
-
+-->
 
 <br /><br />
 
@@ -176,6 +179,8 @@ Lambda Pricing is broken down into two components:
 https://aws.amazon.com/ses/pricing/
 ![AWS SES Pricing](https://cloud.githubusercontent.com/assets/194400/22722910/1f50065c-edb2-11e6-9b91-fe9b75ee973b.png)
 
+
+<!--
 #### API Gateway [$3.50 / 1,000,000](http://www.wolframalpha.com/input/?i=$3.50+%2F+1000000) = $0.00035 (_per request_)
 
 The API Gateway is _useful_ in the "_Serverless_" context.
@@ -189,8 +194,7 @@ https://aws.amazon.com/api-gateway/pricing/
 because it added no value (_actually it adds latency!_)
 to this application (_we aren't using caching or request throttling_)
 and contributed the _vast majority of the **cost**_!!
-
-
+-->
 
 #### Conclusion
 
@@ -198,7 +202,7 @@ We need to make our total (_incremental_) cost of running
 our "Email Solution" _significantly_ cheaper,
 while delivering comparable features.
 
-For _all_ companies/teams using AWS sending up to **1,000,000 Emails a Month**
+For _all_ companies/teams using AWS sending up to **65,000 Emails a Month**
 will be **_Completely_ Free**.
 (_covered by the free usage tier for the first 12 months_).
 
