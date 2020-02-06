@@ -158,7 +158,7 @@ to use our product, the cost of email becomes "_moot_" ... _right_...?
 <br /><br />
 
 
-### AWS Pricing (Lambda + SES) _Per Email_: $0.0001004 ([_78% cheaper!_](https://goo.gl/YJY3lp))
+### AWS Pricing (Lambda + SES) _Per Email_: $0.0001004 
 
 Each email sent has 2 "_parts_" with corresponding costs.
 

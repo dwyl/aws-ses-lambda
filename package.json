@@ -34,7 +34,7 @@
     "Dynamo DB",
     "Serverless"
   ],
-  "author": "@nelsonic & Friends :-)",
+  "author": "dwyl & pals :-)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dwyl/aws-ses-lambda/issues"
