@@ -52,7 +52,5 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# .env environment variables file
 .env
-
-node_modules
