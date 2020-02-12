@@ -6,14 +6,14 @@ we’re excited to have you on board!
 For now, dwyl will help you track your time
 and soon it will help you do much more,
 including making time for what you love.
-https://github.com/ideaq/start-here/blob/master/manifesto.md
+https://github.com/dwyl/start-here/blob/master/manifesto.md
 
 If you have any questions or find any issues, big or small,
 please drop us a note or add an issue to github:
-https://github.com/ideaq/time/labels/MVP
+https://github.com/dwyl/app/labels/MVP
 We really appreciate your feedback!
 
 Happy dwyling
 Inês & Nelson
 Co-Founders
-http://www.dwyl.io
+http://www.dwyl.com
