@@ -1,6 +1,15 @@
-var test = require('tape'); // assign the tape library to the variable "test"
+const test = require('tape');
+const handler = require('../index.js').handler;
 
-test('should return -1 when the value is not present in Array', function (t) {
-  t.equal(-1, [1,2,3].indexOf(4)); // 4 is not present in this array so passes
-  t.end();
+test('send!!!', function (t) {
+  const context = {
+    functionName: 'LambdaTest',
+    functionVersion: '1',
+    invokedFunctionArn: 'arn:aws:lambda:eu-west-1:655240711487:function:LambdaTest:ci'
+  };
+  const event = { key1: 'value1' };
+  handler(context, event, function(err, data){
+    console.log(err, data);
+    t.end();
+  })
 });
