@@ -15,9 +15,9 @@
     "package.json",
     "lib/",
     ".env",
-    "/templates"
+    "templates/"
   ],
-  "lambda_memory": 512,
+  "lambda_memory": 128,
   "lambda_timeout": 42,
   "repository": {
     "type": "git",
@@ -44,18 +44,38 @@
     "aguid": "^1.0.4",
     "aws-lambda-test-utils": "^1.0.2",
     "decache": "^4.1.0",
+    "dpl": "^4.0.0",
     "goodparts": "^1.2.1",
     "istanbul": "^0.4.5",
     "tape": "^4.6.3"
   },
   "dependencies": {
     "aws-sdk": "^2.5.4",
-    "dpl": "^3.7.1",
     "env2": "^2.1.1",
-    "sendemail": "^3.2.0"
+    "sendemail": "^4.0.0"
   },
   "pre-commit": [
     "lint",
     "check-coverage"
-  ]
+  ],
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "include": [
+      "lib/index.js"
+    ],
+    "exclude": [
+      "test/"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "cache": false,
+    "all": true,
+    "report-dir": "./coverage"
+  }
 }

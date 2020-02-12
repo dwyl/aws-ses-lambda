@@ -1,15 +1,18 @@
-var aws = require('aws-sdk');
 require('env2')('.env');
-var send = require('./lib/send');
+console.log(process.env);
+const sendemail = require('sendemail').email;
 
 exports.handler = function (event, context, callback) {
 	console.log(event);
 	console.log('- - - - - - - - - - ');
 	console.log(context);
 	console.log('- - - - - - - - - - ');
-	// console.log(process.env);
-	send(function(err, data) {
-		// console.log(err, data);
-		callback(err, data);
-	});
+  const template = 'welcome';
+  const options = {
+    subject: 'Welcome to dwyl Nelson!',
+    email: 'nelson.k.correia@gmail.com',
+    name: 'Nelson'
+  };
+
+	return sendemail(template, options, callback);
 }
