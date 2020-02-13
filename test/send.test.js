@@ -8,7 +8,8 @@ test('send a welcome email to the simulator', function (t) {
     "email": "success@simulator.amazonses.com"
   };
   handler(event, context, function(err, data){
-    // console.log(err, data);
+    console.log(err, data);
+    console.log(' - - - - - - - - ');
     t.equal(data.MessageId.length, 60,
         "Email sent! MessageId: " + data.MessageId)
     t.end();
