@@ -1,15 +1,16 @@
 const test = require('tape');
 const handler = require('../index.js').handler;
+const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 
-test('send!!!', function (t) {
-  const context = {
-    functionName: 'LambdaTest',
-    functionVersion: '1',
-    invokedFunctionArn: 'arn:aws:lambda:eu-west-1:655240711487:function:myfunc'
+test('send a welcome email to the simulator', function (t) {
+  const event = {
+    "template": "welcome",
+    "email": "success@simulator.amazonses.com"
   };
-  const event = { "key1": "value1", "email": "nelson+lambda@dwyl.com" };
-  handler(context, event, function(err, data){
-    console.log(err, data);
+  handler(event, context, function(err, data){
+    // console.log(err, data);
+    t.equal(data.MessageId.length, 60,
+        "Email sent! MessageId: " + data.MessageId)
     t.end();
   })
 });
