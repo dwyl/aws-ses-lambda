@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- '12'
+cache:
+  directories:
+  - node_modules
+before_install:
+  - echo "export HELLO=world" >> .env
+before_script:
+- npm run eslint
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+env:
+  global:
+    - AWS_REGION=eu-west-1
