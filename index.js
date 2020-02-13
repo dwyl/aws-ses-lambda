@@ -1,21 +1,12 @@
 const env = require('env2')('.env');
-const sendemail = require('sendemail').email;
+const send = require('./lib/send.js');
 
 exports.handler = function (event, context, callback) {
-  // console.log('- - - - - - - - - - event');
-  // console.log('event.email:', event.email);
-	// console.log(event);
-	// console.log('- - - - - - - - - - context');
-	// console.log(context);
-	// console.log('- - - - - - - - - - ');
+  if (event.email) {
+  	return send(event, callback);
+  }
+  else {
+    return callback(null, event)
+  }
 
-  const template = event.template || 'welcome';
-  const options = {
-    subject: 'Welcome to dwyl ' + event.name,
-    email: event.email,
-    name: event.name
-  };
-
-	return sendemail(template, options, callback);
-  // return callback(null, options);
 }

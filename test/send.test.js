@@ -14,3 +14,11 @@ test('send a welcome email to the simulator', function (t) {
     t.end();
   })
 });
+
+test('send email without template', function (t) {
+  const event = { "email": "success@simulator.amazonses.com" };
+  handler(event, context, function(err, data){
+    t.equal(data.MessageId.length, 60, "Sent! MessageId: " + data.MessageId)
+    t.end();
+  })
+});
