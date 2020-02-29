@@ -3,7 +3,7 @@
 
 ### Create an SNS Topic
 
-Visit the AWS Simple Notifications Service (SNS) home page and create a new topic:
+Visit the AWS Simple Notifications Service (SNS) home page and create a new topic: https://eu-west-1.console.aws.amazon.com/sns/v3/home
 
 <img width="1034" alt="new-sns-topic" src="https://user-images.githubusercontent.com/194400/75611041-9d99e600-5b0e-11ea-9c36-1f7318cf3362.png">
 

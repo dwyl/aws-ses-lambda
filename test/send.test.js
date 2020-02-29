@@ -5,7 +5,10 @@ const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 test('send a welcome email to the simulator', function (t) {
   const event = {
     "template": "welcome",
-    "email": "success@simulator.amazonses.com"
+    "email": "success@simulator.amazonses.com",
+    "name": "Great Success!",
+    "subject": "my amazing subject!"
+
   };
   handler(event, context, function(err, data){
     console.log(err, data);

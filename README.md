@@ -54,16 +54,16 @@ how each of these functions works.
 > <sup>1</sup> The `aws-ses-lambda` function **does 3 things**
 because they relate to the unifying theme of
 sending email via SES and tracking the status of the sent emails.
-We _could_ split these 3 functions into separate repositories
+We _could_ split these 3 bits of functionality into separate repositories
 and deploy them separately as distinct lambda functions,
 however in our experience having _too many_ lambda functions
-can quickly become a maintenance headeache.
+can quickly become a maintenance headache.
 We _chose_ to _group_ them together
 because they are small, easy to reason about
-and
+and work well as a team!
 If you feel strongly about the
 [UNIX Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
-definitely split out the functions in your _own_ implementation.
+definitely split out the functions in your _own_ fork/implementation.
 
 
 ## _How_?
@@ -72,17 +72,48 @@ As the name of this project suggests, we are using AWS Lambda,
 to handle all email-related tasks via AWS SES.
 
 > If you (_or anyone `else` on your team_) are new to AWS Lambda,
-see: https://github.com/dwyl/learn-aws-lambda
+see:
+[github.com/dwyl/learn-aws-lambda](https://github.com/dwyl/learn-aws-lambda)
 
 
 
 ### 1. Send Email
 
+Thanks to the work we did earlier on
+[`sendemail`](https://github.com/dwyl/sendemail),
+the email sending part of the lambda is _very_ simple.
 
+We just need to follow the setup instructions in
+[github.com/dwyl/sendemail#how](https://github.com/dwyl/sendemail#how-)
+including creating a `/templates` directory,
+then create a handler function:
+
+
+```js
+const sendemail = require('sendemail').email;
+
+module.exports = function send (event, callback) {
+  const template = event.template || 'welcome';
+  const options = {
+    subject: event.subject || 'Welcome to dwyl ' + event.name,
+    email: event.email,
+    name: event.name
+  };
+  return sendemail(template, options, callback);
+};
+```
+It's really that simple. 
+All the data required for sending an email
+is received in the Lambda **`event`** object.
+
+It works flawlessly.
 
 
 
 ### 2. Parse AWS SNS Notifications
+
+
+
 
 The SNS Notifications
 
