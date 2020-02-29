@@ -13,3 +13,12 @@ test('parse the bounce sns notification event', function (t) {
     "Type: " + json.notificationType)
   t.end();
 });
+
+test('attempt to parse an SNS event without event.Records', function (t) {
+  const event = require('./fixtures/sample_sns_bounce.json');
+  delete event.Records;
+  const json = parse(event)
+
+  t.deepEqual(json, {}, "Does not choke when SNS event is invalid");
+  t.end();
+});
