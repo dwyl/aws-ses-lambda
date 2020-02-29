@@ -32,3 +32,21 @@ test('save event data to S3 without callback', function (t) {
     });
   }, 2000);
 });
+
+test('attempt s3.save without an event (should error)', function (t) {
+  save(null, function callback (error, data) {
+    // console.log('error:', error);
+    t.equal(error, "ERROR: please provide json data", error + " (as expected)");
+    t.end();
+  })
+});
+
+test('attempt s3.get invalid key (should error)', function (t) {
+  const key = Date.now().toString();
+  get(key, function callback (error, data) {
+    // console.log('error:', error, "data:", data);
+    t.equal(error.message, "The specified key does not exist.",
+      error + " (as expected)");
+    t.end();
+  })
+});
