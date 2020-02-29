@@ -77,11 +77,12 @@ see:
 
 
 
-### 1. Send Email
+### 1. _Send_ Email
 
 Thanks to the work we did earlier on
 [`sendemail`](https://github.com/dwyl/sendemail),
-the email sending part of the lambda is _very_ simple.
+sending emails using AWS Simple Email Service (SES)
+from our Lambda function is _very_ simple.
 
 We just need to follow the setup instructions in
 [github.com/dwyl/sendemail#how](https://github.com/dwyl/sendemail#how-)
@@ -113,55 +114,77 @@ It works flawlessly.
 
 
 
-
-### 2. Parse AWS SNS Notifications
-
-
+The full code is included in:
+[`lib/send.js`]()
 
 
-The SNS Notifications
+### 2. _Parse_ AWS SNS Notifications
+
+After an email is sent using AWS SES,
+AWS keeps track of the status of the emails
+e.g `delivered`, `bounce` or `complaint`.
+By _subscribing_ to AWS Simple Notification System (SNS)
+notifications, we can easily keep track of the status.
+
+There are a few steps
+for setting up SNS notifications for SES events,
+so we created detailed setup instructions:
+[`SETUP.md`]()
+
+Once you have configured the SNS Topic,
+used the topic for SES notifications
+and defined the topic as the trigger for the lambda function,
+it's time to _parse_ the notifications.
+
+Thankfully this is _also_ really simple code!
+
+```js
+let json = {};
+if(event && event.Records && event.Records.length > 0) {
+  const msg = JSON.parse(event.Records[0].Sns.Message);
+  json.messageId = msg.mail.messageId;
+  json.notificationType = msg.notificationType + ' ' + msg.bounce.bounceType;
+}
+```
+
+We are only interested in the `messageId` and `notificationType`.
+This code is included in
+[`lib/parse.js`]()
 
 
+During MVP we are only interested in the emails that _bounce_.
+So we are only parsing the bounce event.
+Gmail does not send _delivery_ notifications,
+so we will need to _implement_ a workaround.
+See: https://github.com/dwyl/email/issues/1
+
+More detail on the various SES SNS notifications:
 https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing-retrieving-sns-examples.html
 
-#### 2.1 Create the SNS Topic
-
-> These instructions follow and expand on the _official_
-AWS SNS instructions for creating a Topic:
-https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-sns-notifications.html
-If you get stuck, please _help_ us improve
-by opening an issue!
-
-https://eu-west-1.console.aws.amazon.com/sns/v3/home?region=eu-west-1#/homepage
 
 
+### 3. _Save_ SNS Notification Data
 
-#### 2.x Setup SNS Notification to Trigger Lambda Function
+Once we have _parsed_ the SNS notifications for SES events,
+we need to _save_ the data back to our PostgreSQL database
+so that we can build our analytics dashboard!
 
-Once you have deployed the `aws-ses-lambda` function,
-visit it's configuration page
-and click on **`+ Add trigger`**:
-https://eu-west-1.console.aws.amazon.com/lambda/home?region=eu-west-1#/functions/aws-ses-lambda-v1
+This again is pretty simple code;
+we just invoke `http_request`
+with the `json` data we want to send to the Phoenix App:
 
-<img width="1268" alt="aws-ses-lambda-configure-1" src="https://user-images.githubusercontent.com/194400/75610749-e69c6b00-5b0b-11ea-84cb-069757618121.png">
+```js
+const json = parse(event);
+http_request(json, callback);
+```
 
-Search for SNS in the available triggers:
-<img width="1110" alt="add-trigger-sns" src="https://user-images.githubusercontent.com/194400/75610852-fbc5c980-5b0c-11ea-9047-2c4842e8b2e7.png">
+See this in action in [`index.js`]()
 
-Once you have selected the SNS **topic**, click on the **`Add`** button:
-<img width="1108" alt="create-trigger-sns" src="https://user-images.githubusercontent.com/194400/75610892-4d6e5400-5b0d-11ea-98d3-9b533527869f.png">
-
-
-
-
-
-### 3. Save SNS Notification Data
-
-
-
-
-
-
+The **`http_request`** function wraps the Node.js core
+[`http.request`](https://nodejs.org/api/http.html#http_http_request_options_callback)
+method with a few basic options
+and allows us to pass in a `json` Object
+to send to the Phoenix App.
 
 
 

@@ -11,7 +11,6 @@ exports.handler = function handler (event, context, callback) {
   }
   else {
     const json = parse(event);
-    
     return callback(null, event)
   }
 }
