@@ -1,7 +1,7 @@
-## AWS SNS Setup Instructions
+## AWS SNS Setup Instructions
 
 
-### Create an SNS Topic
+### Create an SNS Topic
 
 Visit the AWS Simple Notifications Service (SNS) home page and create a new topic:
 
@@ -74,7 +74,7 @@ Your configuration should now look something like this:
 <img width="1184" alt="aws-ses-sns-notificaitons-updated" src="https://user-images.githubusercontent.com/194400/75611930-cf16af80-5b16-11ea-9e68-0415f187e326.png">
 
 
-### Test it!!
+### Test it!!
 
 In the Lambda configuration page
 https://eu-west-1.console.aws.amazon.com/lambda/home?region=eu-west-1#/functions/aws-ses-lambda-v1
@@ -88,8 +88,13 @@ _Run_ the bounce event in the Lambda console:
 
 You will see a "success" message confirming that the `aws-ses-lambda` ***attempted*** to send the email to the **`bounce@dwyl.com`** address (_which we know will fail_). Our lambda function and AWS SES does not _know_ that the **`bounce@dwyl.com`** address will bounce. That's the _reason_ we need to have the SNS topic so we can _monitor_ bounce events!
 
-The SNS bounce notification **`event`** is saved to S3 thanks to #12
+The SNS bounce notification **`event`** is saved to S3
+thanks to [#12](https://github.com/dwyl/aws-ses-lambda/issues/12)
 https://ademoapp.s3-eu-west-1.amazonaws.com/event.json
 <img width="1080" alt="bounce-event-saved" src="https://user-images.githubusercontent.com/194400/75612360-937de480-5b1a-11ea-81a0-51200b96bb62.png">
+
+For the purposes of _testing_ our parser,
+we save this `event` JSON in:
+[`test/fixtures/sample_sns_bounce.json`](https://github.com/dwyl/aws-ses-lambda/blob/9ad2381bda7a2f35049732569af055ff80e167d2/test/fixtures/sample_sns_bounce.json)
 
 Now we can _parse_ the notification!
