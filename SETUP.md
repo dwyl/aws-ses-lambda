@@ -72,3 +72,24 @@ then click **`Save Config`**:
 Your configuration should now look something like this:
 
 <img width="1184" alt="aws-ses-sns-notificaitons-updated" src="https://user-images.githubusercontent.com/194400/75611930-cf16af80-5b16-11ea-9e68-0415f187e326.png">
+
+
+### Test it!!
+
+In the Lambda configuration page
+https://eu-west-1.console.aws.amazon.com/lambda/home?region=eu-west-1#/functions/aws-ses-lambda-v1
+configure a bounce event to an email address you _know_ does not exist:
+
+<img width="967" alt="configure-bounce-test-event" src="https://user-images.githubusercontent.com/194400/75612435-43ebe880-5b1b-11ea-9a58-28de4e8f209f.png">
+
+_Run_ the bounce event in the Lambda console:
+
+<img width="1276" alt="lambda-bounce-test" src="https://user-images.githubusercontent.com/194400/75612461-7eee1c00-5b1b-11ea-943e-f20d8b41112e.png">
+
+You will see a "success" message confirming that the `aws-ses-lambda` ***attempted*** to send the email to the **`bounce@dwyl.com`** address (_which we know will fail_). Our lambda function and AWS SES does not _know_ that the **`bounce@dwyl.com`** address will bounce. That's the _reason_ we need to have the SNS topic so we can _monitor_ bounce events!
+
+The SNS bounce notification **`event`** is saved to S3 thanks to #12
+https://ademoapp.s3-eu-west-1.amazonaws.com/event.json
+<img width="1080" alt="bounce-event-saved" src="https://user-images.githubusercontent.com/194400/75612360-937de480-5b1a-11ea-81a0-51200b96bb62.png">
+
+Now we can _parse_ the notification!
