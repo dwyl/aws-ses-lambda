@@ -6,7 +6,7 @@
   "scripts": {
     "nocov": "./node_modules/tape/bin/tape ./test/*.test.js",
     "test": "NODE_ENV=test nyc tape ./test/*.test.js | tap-nyc",
-    "deploy": "node dpl.js",
+    "deploy": "dpl",
     "check-coverage": "npm test && nyc check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
     "eslint": "eslint lib"
   },

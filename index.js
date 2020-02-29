@@ -10,5 +10,4 @@ exports.handler = function handler (event, context, callback) {
   else {
     return callback(null, event)
   }
-
 }
