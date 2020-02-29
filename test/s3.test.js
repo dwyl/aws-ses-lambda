@@ -19,7 +19,7 @@ test('save event data to S3 with callback', function (t) {
   })
 });
 
-test.only('save event data to S3 without callback', function (t) {
+test('save event data to S3 without callback', function (t) {
   const event = require('./fixtures/sample_sns_bounce.json');
   save(event);
   setTimeout(function delay (){
