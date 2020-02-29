@@ -94,19 +94,23 @@ const sendemail = require('sendemail').email;
 
 module.exports = function send (event, callback) {
   const template = event.template || 'welcome';
-  const options = {
-    subject: event.subject || 'Welcome to dwyl ' + event.name,
-    email: event.email,
-    name: event.name
-  };
-  return sendemail(template, options, callback);
+  return sendemail(template, event, callback);
 };
 ```
-It's really that simple. 
+It's really that simple! 😮<br />
 All the data required for sending an email
 is received in the Lambda **`event`** object.
 
+The required keys in the `even` object are:
++ `email` - the email address we want to send an email to.
++ `name` - the name of the person we are sending the email to.
+  (_if your email messages aren't personal, don't send them!_)
++ `subject` - the subject of the email you are sending.
++ `template` - the template you want to send.
+
 It works flawlessly.
+
+
 
 
 
