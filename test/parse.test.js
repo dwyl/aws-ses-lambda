@@ -1,20 +1,15 @@
 const test = require('tape');
-const handler = require('../index.js').handler;
-const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
+const parse = require('../lib/parse.js');
 
-test('', function (t) {
+test('parse the bounce sns notification event', function (t) {
+  const event = require('./fixtures/sample_sns_bounce.json');
 
-  const event = {
-    "template": "welcome",
-    "email": "success@simulator.amazonses.com"
-  };
-
-  handler(event, context, function(err, data){
-    console.log(err, data);
-    console.log(' - - - - - - - - ');
-    t.equal(data.MessageId.length, 60,
-        "Email sent! MessageId: " + data.MessageId)
-    t.end();
-  })
-
+  const json = parse(event)
+  // console.log(json);
+  // console.log(' - - - - - - - - ');
+  const mid = '0102017092006798-f0456694-ac24-487b-9467-b79b8ce798f2-000000';
+  t.equal(json.messageId, mid, "messageId is: " + json.messageId);
+  t.equal(json.notificationType, "Bounce Permanent",
+    "Type: " + json.notificationType)
+  t.end();
 });
