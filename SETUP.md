@@ -46,4 +46,29 @@ You should see a confirmation that your subscription was created successfully:
 instructions:
 https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-sns-notifications.html
 
-Open the SES console: https://eu-west-1.console.aws.amazon.com/ses
+Once you have created the SNS Topic,
+visit the SES home page
+and click on **`Email Addresses`**:
+https://eu-west-1.console.aws.amazon.com/ses
+
+<img width="1266" alt="aws-ses-console-home" src="https://user-images.githubusercontent.com/194400/75611690-c0c79400-5b14-11ea-93af-abcd2cd52c0b.png">
+
+Click on the _verified_ email address
+you want to configure SNS notifications for:
+
+<img width="1234" alt="aws-ses-email-address-no-topics" src="https://user-images.githubusercontent.com/194400/75611797-8d393980-5b15-11ea-8c7f-53908c4873fa.png">
+
+In the **`Notifications`** section,
+click on **`Edit configuration`**:
+
+<img width="1234" alt="aws-ses-edit-configuration" src="https://user-images.githubusercontent.com/194400/75611829-f751de80-5b15-11ea-802e-c75e29ad6d03.png">
+
+Select the SNS topic we created above
+for _all_ the types of notification
+then click **`Save Config`**:
+
+<img width="1117" alt="aws-ses-sns-notifications-edit-configuration" src="https://user-images.githubusercontent.com/194400/75611888-629bb080-5b16-11ea-8770-0683f56324a8.png">
+
+Your configuration should now look something like this:
+
+<img width="1184" alt="aws-ses-sns-notificaitons-updated" src="https://user-images.githubusercontent.com/194400/75611930-cf16af80-5b16-11ea-9e68-0415f187e326.png">
