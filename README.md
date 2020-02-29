@@ -89,6 +89,35 @@ The SNS Notifications
 
 https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing-retrieving-sns-examples.html
 
+#### 2.1 Create the SNS Topic
+
+> These instructions follow and expand on the _official_
+AWS SNS instructions for creating a Topic:
+https://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-sns-notifications.html
+If you get stuck, please _help_ us improve
+by opening an issue!
+
+https://eu-west-1.console.aws.amazon.com/sns/v3/home?region=eu-west-1#/homepage
+
+
+
+#### 2.x Setup SNS Notification to Trigger Lambda Function
+
+Once you have deployed the `aws-ses-lambda` function,
+visit it's configuration page
+and click on **`+ Add trigger`**:
+https://eu-west-1.console.aws.amazon.com/lambda/home?region=eu-west-1#/functions/aws-ses-lambda-v1
+
+<img width="1268" alt="aws-ses-lambda-configure-1" src="https://user-images.githubusercontent.com/194400/75610749-e69c6b00-5b0b-11ea-84cb-069757618121.png">
+
+Search for SNS in the available triggers:
+<img width="1110" alt="add-trigger-sns" src="https://user-images.githubusercontent.com/194400/75610852-fbc5c980-5b0c-11ea-9047-2c4842e8b2e7.png">
+
+Once you have selected the SNS **topic**, click on the **`Add`** button:
+<img width="1108" alt="create-trigger-sns" src="https://user-images.githubusercontent.com/194400/75610892-4d6e5400-5b0d-11ea-98d3-9b533527869f.png">
+
+
+
 
 
 ### 3. Save SNS Notification Data
