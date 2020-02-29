@@ -6,6 +6,17 @@ An AWS Lambda Function that Sends Email
 via Simple Email Service (SES)
 and handles notifications for bounces, etc.
 
+
+[![Build Status](https://img.shields.io/travis/dwyl/aws-ses-lambda/master.svg?style=flat-square)](https://travis-ci.org/dwyl/aws-ses-lambda)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/aws-ses-lambda/master.svg?style=flat-square)](http://codecov.io/github/dwyl/aws-ses-lambda?branch=master)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/dwyl/aws-ses-lambda?color=brightgreen&style=flat-square)](https://codeclimate.com/github/dwyl/aws-ses-lambda)
+[![dependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda)
+[![devDependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda?type=dev)
+<!-- [![HitCount](http://hits.dwyl.com/dwyl/aws-ses-lambda.svg)](http://hits.dwyl.com/dwyl/aws-ses-lambda) -->
+[![npm package version](https://img.shields.io/npm/v/aws-ses-lambda.svg?color=brightgreen&style=flat-square)](https://www.npmjs.com/package/dpl)
+[![Node.js Version](https://img.shields.io/node/v/aws-ses-lambda.svg?style=flat-square "Only Node.js v12 LTS supported")](http://nodejs.org/download/)
+
+
 </div>
 <br />
 
@@ -20,19 +31,93 @@ and _most importantly_ we needed to _**know** with **certainty**_:
 
 + Are our emails being ***delivered successfully***?
 + How many emails are ***bouncing***?
-+ Are we **re-sending email** to addresses that have "***bounced***"?
++ Are we attempting to **re-send email** to addresses that have "***bounced***"?
 (_i.e. wasting money?!_)
 + Are people ***opening*** / ***reading*** the email?
-+ Do people ***engage*** with the **content** of the email?
-
-> **Note**: all the same reasons ***Why*** that apply to `sendemail` <br />
-(_the pre-cursor to this project_) apply here. <br />
-see: https://github.com/dwyl/sendemail#why
-
++ Do people ***engage*** with the **content** of the email? (_click through_)
 
 
 
 ## _What_? 💡
+
+The `aws-ses-lambda` function does three _related_ things<sup>1</sup>:
+
+1. Send emails.
+2. Parse AWS SNS notifications related to the emails that were sent.
+3. Send the parsed SNS notification data
+to a designated endpoint for storage, aggregation and visualisation.
+
+The _How?_ section below explains
+how each of these functions works.
+
+
+> <sup>1</sup> The `aws-ses-lambda` function **does 3 things**
+because they relate to the unifying theme of
+sending email via SES and tracking the status of the sent emails.
+We _could_ split these 3 functions into separate repositories
+and deploy them separately as distinct lambda functions,
+however in our experience having _too many_ lambda functions
+can quickly become a maintenance headeache.
+We _chose_ to _group_ them together
+because they are small, easy to reason about
+and
+If you feel strongly about the
+[UNIX Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
+definitely split out the functions in your _own_ implementation.
+
+
+## _How_?
+
+As the name of this project suggests, we are using AWS Lambda,
+to handle all email-related tasks via AWS SES.
+
+> If you (_or anyone `else` on your team_) are new to AWS Lambda,
+see: https://github.com/dwyl/learn-aws-lambda
+
+
+
+### 1. Send Email
+
+
+
+
+
+### 2. Parse AWS SNS Notifications
+
+The SNS Notifications
+
+
+https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing-retrieving-sns-examples.html
+
+
+
+### 3. Save SNS Notification Data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br /> <br /> <br />
+
+
+
+
+
+
+
+
+
+
+
 
 ### Features / Requirements
 
@@ -76,15 +161,12 @@ each time
 aws-ses-bounce-checker periodically retrieves stats on outbound emails from SES.
 These include bounce rates and whether an email has been opened.
 
-## _How_?
 
-As the name of this project suggests, we are using AWS Lambda,
-to handle all email-related tasks.
 
-> If you (_or anyone `else` on your team_) are new to AWS Lambda,
-see: https://github.com/dwyl/learn-aws-lambda
 
-<br /> <br /> <br />
+
+
+
 
 ## (_Potential_) "Future Features"
 

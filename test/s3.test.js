@@ -1,14 +1,34 @@
 const test = require('tape');
 const save = require('../lib/s3.js').save;
+const get = require('../lib/s3.js').get;
 const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 
 test('save event data to S3 with callback', function (t) {
-  const event = {"hello":"world"};
+  const time = Date.now().toString();
+  const event = {"hello":"world!", "time": time};
   save(event, function(error, data) {
-    console.log('error:', error);
-    console.log('data (event):', data);
-
-    // t.deepEqual(event, data)
-    t.end();
+    // console.log('error:', error);
+    // console.log('data (event):', data);
+    // retrieve the data from S3 to confirm it was saved correctly!
+    get(data.key, function(error2, data2) {
+      // console.log(' - - - - get:');
+      // console.log(error2, data2);
+      t.deepEqual(event, data2, "event save/get success! "  + data2.time);
+      t.end();
+    });
   })
+});
+
+test('save event data to S3 without callback', function (t) {
+  const time = Date.now().toString();
+  const event = {"Ciao":"mondo!", "time": time};
+  save(event);
+  setTimeout(function delay (){
+    get('event.json', function(error2, data2) {
+      // console.log(' - - - - get:');
+      // console.log(error2, data2);
+      t.deepEqual(event, data2, "event saved and retrieved! " + data2.time);
+      t.end();
+    });
+  }, 2000);
 });
