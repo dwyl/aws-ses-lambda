@@ -10,6 +10,12 @@ before_script:
 - npm run eslint
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+# https://docs.travis-ci.com/user/deployment/script/
+# deploy:
+#   provider: script
+#   script: npm run deploy
+#   on:
+#     branch: master
 env:
   global:
   - AWS_REGION=eu-west-1

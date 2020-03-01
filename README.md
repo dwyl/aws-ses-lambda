@@ -174,11 +174,13 @@ we just invoke `http_request`
 with the `json` data we want to send to the Phoenix App:
 
 ```js
-const json = parse(event);
-http_request(json, callback);
+const json = parse(event); // parse SNS event see: step 2.
+http_request(json, callback); // json data & lambda callback argument
 ```
 
-See this in action in [`index.js`]()
+View the complete code in [`index.js`]()
+and the supporting `http_request` function in
+[`lib/http_request.js`]()
 
 The **`http_request`** function wraps the Node.js core
 [`http.request`](https://nodejs.org/api/http.html#http_http_request_options_callback)
@@ -186,7 +188,12 @@ method with a few basic options
 and allows us to pass in a `json` Object
 to send to the Phoenix App.
 
+### Environment Variables
 
+In order for all parts of the Lambda function to work,
+we need to ensure that all environment variables are defined.
+
+For the complete list of required environment
 
 
 
