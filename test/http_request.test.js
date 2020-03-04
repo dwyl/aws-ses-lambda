@@ -17,13 +17,13 @@ test('test extracting data from JWT', function (t) {
 
 
 test('send data to Phoenix', function (t) {
-
   const json = {
     message_id: '0102017092006798-f0456694-ac24-487b-9467-b79b8ce798f2-000000',
-    status: 'Bounce Permanent'
+    status: 'Sent'
   }
-  http_request(json, function (error, response) {
-    console.log(error, response);
+  http_request(json, function (status, response) {
+    // console.log(status, response);
+    t.equal(status, 200, "data successfully sent to Phoenix!")
     t.end();
   });
 });
