@@ -23,8 +23,8 @@ test('POST sns event to Phoenix App via index.handler', function (t) {
   const event = require('./fixtures/sample_sns_bounce.json');
   handler(event, context, function (status, data) {
     // console.log('event:', event);
-    // console.log('status:', status);
-    // console.log('data:', data);
+    console.log('status:', status);
+    console.log('data:', data);
     t.equal(status, 200, "data successfully sent to Phoenix!");
     t.end();
   })

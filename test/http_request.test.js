@@ -9,7 +9,9 @@ test('test extracting data from JWT', function (t) {
     status: 'Bounce Permanent'
   }
   const token = jwt.sign(json, process.env.JWT_SECRET);
+  // console.log("token:", token);
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
   t.equal(decoded.message_id, json.message_id, "JWT verification works");
   // console.log('decoded:', decoded);
   t.end();
