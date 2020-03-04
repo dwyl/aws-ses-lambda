@@ -10,7 +10,7 @@ test('test extracting data from JWT', function (t) {
   }
   const token = jwt.sign(json, process.env.JWT_SECRET);
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  t.equal(decoded.message_id, json.message_id, "JWT verification works")
+  t.equal(decoded.message_id, json.message_id, "JWT verification works");
   // console.log('decoded:', decoded);
   t.end();
 });
@@ -22,32 +22,8 @@ test('send data to Phoenix', function (t) {
     status: 'Sent'
   }
   http_request(json, function (status, response) {
-    // console.log(status, response);
-    t.equal(status, 200, "data successfully sent to Phoenix!")
+    console.log('status:', status, 'response:', response);
+    t.equal(status, 200, "data successfully sent to Phoenix!");
     t.end();
   });
 });
-
-/*
-test('make GET request to invalid url (error branch check)', function (t) {
-  const path = '/nelsonic' ;
-  http_request(path, function (statusCode, html) {
-    // console.log(statusCode, html);
-    t.equal(statusCode, 200, 'statusCode for valid request is: ' + statusCode);
-    t.ok(html.indexOf('<!DOCTYPE html>') > -1, 'got html back from GitHub');
-    t.end();
-  });
-});
-
-// see: https://github.com/nelsonic/github-scraper/issues/60
-const validate = require('../lib/url_validator');
-
-test('Regression Test for issue #60', function(t) {
-  const path = '/hangouts/followers';
-  http_request(path, function (statusCode, html) {
-    t.equal(statusCode, 200, 'statusCode for valid request is: ' + statusCode);
-    t.ok(html.indexOf('<!DOCTYPE html>') > -1, 'got html back from GitHub');
-    t.end();
-  });
-});
-*/
