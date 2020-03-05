@@ -223,7 +223,37 @@ it's time to _deploy_ the Lambda function to AWS!
 
 ### _Deploy_ the Lambda to AWS!
 
+Run the following command in your terminal:
 
+```
+npm run deploy
+```
+
+You should see output similar to the following:
+
+```
+- - - - - - - - > Lambda Function Deployed:
+{
+  FunctionName: 'aws-ses-lambda-v1',
+  FunctionArn: 'arn:aws:lambda:eu-west-1:123456789247:function:aws-ses-lambda-v1',
+  Runtime: 'nodejs12.x',
+  Role: 'arn:aws:iam::123456789247:role/service-role/LambdaExecRole',
+  Handler: 'index.handler',
+  CodeSize: 8091768,
+  Description: 'A complete solution for sending email via AWS SES using Lambda | https://github.com/dwyl/aws-ses-lambda/commit/5d0a719568c27987be32e5d22547f7224eb45c03',
+  Timeout: 42,
+  MemorySize: 128,
+  LastModified: '2020-03-05T23:42:56.809+0000',
+  CodeSha256: 'jvOg/+8y9UwBcLeTprMRIEvT0ryun1bdjzrAJXAk5m8=',
+  Version: '$LATEST',
+  Environment: { Variables: { EMAIL_APP_URL: 'phemail.herokuapp.com' } },
+  TracingConfig: { Mode: 'PassThrough' },
+  RevisionId: '42442cee-d506-4aa5-aec5-d7fb73145a58',
+  State: 'Active',
+  LastUpdateStatus: 'Successful'
+}
+- - - - - - - - > took 8.767 seconds
+```
 
 
 
