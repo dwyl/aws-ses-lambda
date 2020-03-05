@@ -65,14 +65,15 @@ because they are small, easy to reason about
 and work well as a team!
 If you feel strongly about the
 [UNIX Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
-definitely split out the functions in your _own_ fork/implementation. <br />
+definitely split out the functions in your _own_ fork/implementation.
 > The code for this Lambda function is less than
 [**100 lines**](https://codecov.io/gh/dwyl/aws-ses-lambda/tree/master/lib)
 and can be read in **10 minutes**.
-The [**`sendemail`**](https://github.com/dwyl/sendemail)
-which the lambda uses to send emails via AWS SES is 38 lines of code:
+The [**`sendemail`**](https://github.com/dwyl/sendemail) module
+which the Lambda uses to send emails via AWS SES is **38 lines** of code. See:
 [lib/index.js](https://codecov.io/gh/dwyl/sendemail/src/master/lib/index.js)
 it's mostly comments which make it very beginner friendly.
+
 
 
 ## _How_?
@@ -84,6 +85,7 @@ to handle all email-related tasks via AWS SES.
 see:
 [github.com/dwyl/learn-aws-lambda](https://github.com/dwyl/learn-aws-lambda)
 
+In this section we will break down _how_ the lambda works.
 
 
 ### 1. _Send_ Email
@@ -103,11 +105,11 @@ then create a handler function:
 const sendemail = require('sendemail').email;
 
 module.exports = function send (event, callback) {
-  const template = event.template || 'welcome';
-  return sendemail(template, event, callback);
+  return sendemail(event.template, event, callback);
 };
 ```
-It's really that simple! 😮<br />
+
+Don't you just _love_ it when things are _that_ simple?! <br />
 All the data required for sending an email
 is received in the Lambda **`event`** object.
 
@@ -120,29 +122,30 @@ The required keys in the `even` object are:
 
 It works flawlessly.
 
+<!-- Insert screenshot of received email -->
 
 
-
-The full code is included in:
+The full code is:
 [`lib/send.js`](https://codecov.io/gh/dwyl/aws-ses-lambda/src/master/lib/send.js)
+
 
 
 ### 2. _Parse_ AWS SNS Notifications
 
 After an email is sent using AWS SES,
 AWS keeps track of the status of the emails
-e.g `delivered`, `bounce` or `complaint`.
+e.g `delivered`, `bounce` or `complaint`. <br />
 By _subscribing_ to AWS Simple Notification System (SNS)
-notifications, we can easily keep track of the status.
+notifications, we can keep track of the status.
 
 There are a few steps
 for setting up SNS notifications for SES events,
 so we created detailed setup instructions:
-[`SETUP.md`]()
+[`SETUP.md`](https://github.com/dwyl/aws-ses-lambda/blob/master/SETUP.md)
 
 Once you have configured the SNS Topic,
 used the topic for SES notifications
-and defined the topic as the trigger for the lambda function,
+and set the topic as the trigger for the lambda function,
 it's time to _parse_ the notifications.
 
 Thankfully this is _also_ really simple code!
@@ -158,7 +161,7 @@ if(event && event.Records && event.Records.length > 0) {
 
 We are only interested in the `messageId` and `notificationType`.
 This code is included in
-[`lib/parse.js`]()
+[`lib/parse.js`](https://github.com/dwyl/aws-ses-lambda/blob/master/lib/parse.js)
 
 
 During MVP we are only interested in the emails that _bounce_.
@@ -197,12 +200,28 @@ method with a few basic options
 and allows us to pass in a `json` Object
 to send to the Phoenix App.
 
-### Environment Variables
+### Required Environment Variables
 
 In order for all parts of the Lambda function to work,
 we need to ensure that all environment variables are defined.
 
-For the complete list of required environment
+For the complete list of required environment variables,
+please see the [`.env_sample`](https://github.com/dwyl/aws-ses-lambda/blob/master/.env_sample) file.
+
+Copy the [`.env_sample`](https://github.com/dwyl/aws-ses-lambda/blob/master/.env_sample) file and create a `.env` file:
+
+```
+cp .env_sample .env
+```
+
+Then update all the values in the file
+so that they are the _real_ values.
+
+
+Once you have a `.env` file with all the correct environment variables,
+it's time to _deploy_ the Lambda function to AWS!
+
+### _Deploy_ the Lambda to AWS!
 
 
 
@@ -234,7 +253,8 @@ send to has bounced in the past.
 
 #### 2. Send Email
 
-+ Send the email using AWS SES and keep a note of the unique ID confirming the email was sent.
++ Send the email using AWS SES and keep a note of the
+unique ID confirming the email was sent.
 
 #### 3. Log Email Sent
 
@@ -306,32 +326,3 @@ not merely "_transactional_".
 i.e. not something to be "_outsourced_"
 to a "black box" provider that "_takes care of everything_" for us.
 We want to have full control and deep insights into our email system.
-
-
-
-<br /><br />
-
-
-# aws-ses-bounce-checker :mailbox_with_mail:
-A tool to check if emails sent by SES have bounced.
-
-Test that POST-ing to the `/bounce` endpoint with a email address
-in the payload inserts into database:
-
-```sh
-curl -H "Content-Type: application/json" -X POST -d '{"email":"rorry@email.net"}' http://localhost:8000/bounce
-```
-
-Or testing against our Heroku endpoint:
-```sh
-curl -H "Content-Type: application/json" -X POST -d '{"email":"my.test@email.net"}' https://aws-ses-bounce.herokuapp.com/bounce
-```
-
-
-JSON test message:
-```js
-{
-"default": "{\"email\":\"sns.test.email@aws.test\"}",
-"https": "{\"email\":\"sns.test.email@aws.test\"}"
-}
-```
