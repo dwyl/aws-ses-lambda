@@ -228,89 +228,6 @@ it's time to _deploy_ the Lambda function to AWS!
 
 
 
-<br /> <br /> <br />
-
-
-
-
-
-
-
-
-
-
-
-
-### Features / Requirements
-
-Each time an email is sent using the `aws-ses-lambda` 5 things happen:
-
-#### 1. Pre-Send Checks
-
-+ Is the email address valid. (_basic checks to avoid wasting money_)
-+ Check our records to see if the email address we are attempting to
-send to has bounced in the past.
-
-#### 2. Send Email
-
-+ Send the email using AWS SES and keep a note of the
-unique ID confirming the email was sent.
-
-#### 3. Log Email Sent
-
-+ Log all detail of the sent email to the Database
-
-#### 4. Query SES Bounce/Spam Info Service
-
-+ Check which emails have bounced
-
-#### 5. Report Stats/Summary in Dashboard
-
-+ Update the Database with the send/receipt stats
-so that they can be viewed on the team's Email Dashboard!
-
-<br />
-
-## Frequently Asked Questions (FAQ)
-
-#### Separate Lambda Functions or One Lambda with Independent Functions?
-
-From _experience_ making distinct functions _separate_ lambda functions,
-just increases our cost/complexity without any discernible benefit.
-
-Having separate lambdas when we _know_ that all functionality is executed
-each time
-
-aws-ses-bounce-checker periodically retrieves stats on outbound emails from SES.
-These include bounce rates and whether an email has been opened.
-
-
-
-
-
-
-
-
-## (_Potential_) "Future Features"
-
-This is a _potential_ features "_roadmap_" in (_descending_) order of importance.
-
-+ [ ] **Email templates** should be in a ***separate repo***
-from the "main" application in _any_ (_all_) our projects.
-Non-technical team members should be able
-to update the template (_using their "basic" HTML + handlebars knowledge_)
-and should be able to save a draft of the changes to GitHub
-(_without having to run the "CI" for an entire "web app" project!_)
-+ [ ] **Send Sample Email** to _myself_ to check layout/design and confirm
-the flow is working.
-+ [ ] Extend the [Deployment Tool](https://www.npmjs.com/package/dpl)
-to ***automatically configure*** the **API Gateway**
-see: https://github.com/dwyl/learn-aws-lambda/issues/62#issuecomment-278009814
-(_for now I am doing it manually..._)
-+ [ ] **Consider Using DynamoDB** for truly "Serverless" email?
-(_this could/should be implemented by someone other than the "core" dwyl team
-as I have no "appetite" for the DynamoDB pricing model... but it's something
-someone `else` might consider adding_)
 
 <br /> <br /> <br />
 
@@ -320,9 +237,24 @@ someone `else` might consider adding_)
 
 There are _way_ more reasons
 _why_ we are handcrafting this app
-than the ones stated above.
-We see email as "_operationally strategic_",
+than the ones stated above. <br />
+We see email as our primary feedback mechanism
+and thus "_operationally strategic_",
 not merely "_transactional_".
 i.e. not something to be "_outsourced_"
 to a "black box" provider that "_takes care of everything_" for us.
-We want to have full control and deep insights into our email system.
+We want to have full control and deep insights into our email system. <br />
+By using a _decoupled_ lambda function to send email
+and subscribe to SNS events
+we keep all the AWS specific
+functionality in a single place.
+This is easy to reason about, maintain and _extend_ when required.
+In the future, if we decide to switch email sending provider,
+(_or run our own email service_),
+we can simply re-write the `sendemail`
+and `parse_notification` functions
+and not need to touch our **`email`** analytics dashboard at all!
+
+For now SES is _by far_ the cheapest
+and superbly reliable way to send email.
+We are very happy to let AWS take care of _this_ part of our stack.
