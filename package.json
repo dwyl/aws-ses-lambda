@@ -1,6 +1,6 @@
 {
   "name": "aws-ses-lambda",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A complete solution for sending email via AWS SES using Lambda",
   "main": "lib/index.js",
   "scripts": {
@@ -55,6 +55,9 @@
     "aws-sdk": "^2.626.0",
     "env2": "^2.2.2",
     "sendemail": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=12.5.0"
   },
   "pre-commit": [
     "eslint",
