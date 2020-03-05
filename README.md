@@ -23,29 +23,31 @@ and handles notifications for bounces, etc.
 ## _Why_? 🤷
 
 We send (_and receive_) a lot of email
-for both @dwyl products
-and client projects.
-
+both for the @dwyl App
+and our newsletter. <br />
 We need a simple, scalable & maintainable way of sending email,
 and _most importantly_ we needed to _**know** with **certainty**_:
 
-+ Are our emails being ***delivered successfully***?
++ Are our emails being ***delivered***?
 + How many emails are ***bouncing***?
-+ Are we attempting to **re-send email** to addresses that have "***bounced***"?
++ Are we attempting to **re-send email**
+to addresses that have "***bounced***"?
 (_i.e. wasting money?!_)
 + Are people ***opening*** / ***reading*** the email?
 + Do people ***engage*** with the **content** of the email? (_click through_)
++ If someone no longer wants to receive emails (_too many or not relevant_),
+do we have a reliable way for them to ***unsubscribe***?
 
+This project is our quest to answer these questions.
 
 
 ## _What_? 💡
 
 The `aws-ses-lambda` function does three _related_ things<sup>1</sup>:
 
-1. Send emails.
-2. Parse AWS SNS notifications related to the emails that were sent.
-3. Send the parsed SNS notification data
-to a designated endpoint for storage, aggregation and visualisation.
+1. **Send** emails.
+2. **Parse** AWS SNS notifications related to the emails that were sent.
+3. **Save** the parsed SNS notification data for aggregation and visualisation.
 
 The _How?_ section below explains
 how each of these functions works.
@@ -53,7 +55,7 @@ how each of these functions works.
 
 > <sup>1</sup> The `aws-ses-lambda` function **does 3 things**
 because they relate to the unifying theme of
-sending email via SES and tracking the status of the sent emails.
+sending email via SES and tracking the status of the sent emails via SNS.
 We _could_ split these 3 bits of functionality into separate repositories
 and deploy them separately as distinct lambda functions,
 however in our experience having _too many_ lambda functions
@@ -63,7 +65,14 @@ because they are small, easy to reason about
 and work well as a team!
 If you feel strongly about the
 [UNIX Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
-definitely split out the functions in your _own_ fork/implementation.
+definitely split out the functions in your _own_ fork/implementation. <br />
+> The code for this Lambda function is less than
+[**100 lines**](https://codecov.io/gh/dwyl/aws-ses-lambda/tree/master/lib)
+and can be read in **10 minutes**.
+The [**`sendemail`**](https://github.com/dwyl/sendemail)
+which the lambda uses to send emails via AWS SES is 38 lines of code:
+[lib/index.js](https://codecov.io/gh/dwyl/sendemail/src/master/lib/index.js)
+it's mostly comments which make it very beginner friendly.
 
 
 ## _How_?
@@ -115,7 +124,7 @@ It works flawlessly.
 
 
 The full code is included in:
-[`lib/send.js`]()
+[`lib/send.js`](https://codecov.io/gh/dwyl/aws-ses-lambda/src/master/lib/send.js)
 
 
 ### 2. _Parse_ AWS SNS Notifications
