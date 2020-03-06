@@ -4,7 +4,7 @@
 
 An AWS Lambda Function that Sends Email
 via Simple Email Service (SES)
-and handles notifications for bounces, etc.
+and handles notifications for bounces, etc. 📈
 
 
 [![Build Status](https://img.shields.io/travis/dwyl/aws-ses-lambda/master.svg?style=flat-square)](https://travis-ci.org/dwyl/aws-ses-lambda)
@@ -13,7 +13,7 @@ and handles notifications for bounces, etc.
 [![dependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda)
 [![devDependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda?type=dev)
 [![HitCount](http://hits.dwyl.com/dwyl/aws-ses-lambda.svg)](http://hits.dwyl.com/dwyl/aws-ses-lambda)
-[![npm package version](https://img.shields.io/npm/v/aws-ses-lambda.svg?color=brightgreen&style=flat-square)](https://www.npmjs.com/package/dpl)
+[![npm package version](https://img.shields.io/npm/v/aws-ses-lambda.svg?color=brightgreen&style=flat-square)](https://www.npmjs.com/package/aws-ses-lambda)
 [![Node.js Version](https://img.shields.io/node/v/aws-ses-lambda.svg?style=flat-square "Only Node.js v12 LTS supported")](http://nodejs.org/download/)
 
 
@@ -51,6 +51,28 @@ The `aws-ses-lambda` function does three _related_ things<sup>1</sup>:
 
 The _How?_ section below explains
 how each of these functions works.
+
+This (ascii) diagram explains the context where `aws-ses-lambda` is used:
+
+```
+The main App does not do any Email as that is is not it's core function.
+It delegates all email sending and monitoring activity to the aws-ses-lambda.
+
+┌─────┐  send   ┌────────────────┐
+| App | ───────>| aws-ses-lambda |─┐ The Lambda function Sends email
+└─────┘  email  └────────────────┘ | and handles SNS notifications
+                                   | for bounce events.
+  ┌───────┐    SNS Notification    |
+  | Email | <──────────────────────┘
+  |  App  |
+  └───────┘  
+  The Email Stats App aggregates and visualises email stats.
+  This allows us to be more data-driven in our communications.
+  And understand exactly who is engaged with the app.
+
+  This is not a full on  it's just an attempt to make email
+  sending/monitoring separate so our App can focus on core features.
+```
 
 
 ## _How_?
