@@ -12,7 +12,7 @@ and handles notifications for bounces, etc.
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/dwyl/aws-ses-lambda?color=brightgreen&style=flat-square)](https://codeclimate.com/github/dwyl/aws-ses-lambda)
 [![dependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda)
 [![devDependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda?type=dev)
-<!-- [![HitCount](http://hits.dwyl.com/dwyl/aws-ses-lambda.svg)](http://hits.dwyl.com/dwyl/aws-ses-lambda) -->
+[![HitCount](http://hits.dwyl.com/dwyl/aws-ses-lambda.svg)](http://hits.dwyl.com/dwyl/aws-ses-lambda)
 [![npm package version](https://img.shields.io/npm/v/aws-ses-lambda.svg?color=brightgreen&style=flat-square)](https://www.npmjs.com/package/dpl)
 [![Node.js Version](https://img.shields.io/node/v/aws-ses-lambda.svg?style=flat-square "Only Node.js v12 LTS supported")](http://nodejs.org/download/)
 
@@ -208,7 +208,7 @@ npm run deploy
 
 You should see output similar to the following:
 
-```
+```sh
 - - - - - - - - > Lambda Function Deployed:
 {
   FunctionName: 'aws-ses-lambda-v1',
@@ -217,7 +217,7 @@ You should see output similar to the following:
   Role: 'arn:aws:iam::123456789247:role/service-role/LambdaExecRole',
   Handler: 'index.handler',
   CodeSize: 8091768,
-  Description: 'A complete solution for sending email via AWS SES using Lambda | https://github.com/dwyl/aws-ses-lambda/commit/5d0a719568c27987be32e5d22547f7224eb45c03',
+  Description: 'A complete solution for sending email via AWS SES using Lambda',
   Timeout: 42,
   MemorySize: 128,
   LastModified: '2020-03-05T23:42:56.809+0000',
@@ -232,7 +232,7 @@ You should see output similar to the following:
 - - - - - - - - > took 8.767 seconds
 ```
 
-Ensure you follow the instructions in
+Ensure you follow all the instructions in
 [`SETUP.md`](https://github.com/dwyl/aws-ses-lambda/blob/master/SETUP.md)
 to get the SNS Topic to trigger the Lambda function for SES notifications.
 
@@ -269,12 +269,12 @@ and superbly reliable way to send email.
 We are very happy to let AWS take care of _this_ part of our stack.
 
 
-### Why Only One Lambda Function?
+### Why Only _One_ Lambda Function?
 
 <sup>1</sup> The `aws-ses-lambda` function **does 3 things**
 because they relate to the unifying theme of
 sending email via SES and tracking the status of the sent emails via SNS.
-We _could_ split these 3 bits of functionality into separate repositories
+We _could_ have split these 3 bits of functionality into separate repositories
 and deploy them separately as distinct lambda functions,
 however in our experience having _too many_ lambda functions
 can quickly become a maintenance headache.
@@ -283,8 +283,8 @@ because they are small, easy to reason about
 and work well as a team!
 If you feel strongly about the
 [UNIX Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
-definitely split out the functions in your _own_ fork/implementation.
-> The code for this Lambda function is less than
+definitely split out the functions in your _own_ fork/implementation. <br />
+The code for this Lambda function is less than
 [**100 lines**](https://codecov.io/gh/dwyl/aws-ses-lambda/tree/master/lib)
 and can be read in **10 minutes**.
 The [**`sendemail`**](https://github.com/dwyl/sendemail) module
