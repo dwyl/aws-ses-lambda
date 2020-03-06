@@ -232,7 +232,9 @@ You should see output similar to the following:
 - - - - - - - - > took 8.767 seconds
 ```
 
-
+Ensure you follow the instructions in
+[`SETUP.md`](https://github.com/dwyl/aws-ses-lambda/blob/master/SETUP.md)
+to get the SNS Topic to trigger the Lambda function for SES notifications.
 
 
 
@@ -267,7 +269,9 @@ and superbly reliable way to send email.
 We are very happy to let AWS take care of _this_ part of our stack.
 
 
-> <sup>1</sup> The `aws-ses-lambda` function **does 3 things**
+### Why Only One Lambda Function?
+
+<sup>1</sup> The `aws-ses-lambda` function **does 3 things**
 because they relate to the unifying theme of
 sending email via SES and tracking the status of the sent emails via SNS.
 We _could_ split these 3 bits of functionality into separate repositories
