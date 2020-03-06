@@ -53,29 +53,6 @@ The _How?_ section below explains
 how each of these functions works.
 
 
-> <sup>1</sup> The `aws-ses-lambda` function **does 3 things**
-because they relate to the unifying theme of
-sending email via SES and tracking the status of the sent emails via SNS.
-We _could_ split these 3 bits of functionality into separate repositories
-and deploy them separately as distinct lambda functions,
-however in our experience having _too many_ lambda functions
-can quickly become a maintenance headache.
-We _chose_ to _group_ them together
-because they are small, easy to reason about
-and work well as a team!
-If you feel strongly about the
-[UNIX Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
-definitely split out the functions in your _own_ fork/implementation.
-> The code for this Lambda function is less than
-[**100 lines**](https://codecov.io/gh/dwyl/aws-ses-lambda/tree/master/lib)
-and can be read in **10 minutes**.
-The [**`sendemail`**](https://github.com/dwyl/sendemail) module
-which the Lambda uses to send emails via AWS SES is **38 lines** of code. See:
-[lib/index.js](https://codecov.io/gh/dwyl/sendemail/src/master/lib/index.js)
-it's mostly comments which make it very beginner friendly.
-
-
-
 ## _How_?
 
 As the name of this project suggests, we are using AWS Lambda,
@@ -288,3 +265,25 @@ and not need to touch our **`email`** analytics dashboard at all!
 For now SES is _by far_ the cheapest
 and superbly reliable way to send email.
 We are very happy to let AWS take care of _this_ part of our stack.
+
+
+> <sup>1</sup> The `aws-ses-lambda` function **does 3 things**
+because they relate to the unifying theme of
+sending email via SES and tracking the status of the sent emails via SNS.
+We _could_ split these 3 bits of functionality into separate repositories
+and deploy them separately as distinct lambda functions,
+however in our experience having _too many_ lambda functions
+can quickly become a maintenance headache.
+We _chose_ to _group_ them together
+because they are small, easy to reason about
+and work well as a team!
+If you feel strongly about the
+[UNIX Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well)
+definitely split out the functions in your _own_ fork/implementation.
+> The code for this Lambda function is less than
+[**100 lines**](https://codecov.io/gh/dwyl/aws-ses-lambda/tree/master/lib)
+and can be read in **10 minutes**.
+The [**`sendemail`**](https://github.com/dwyl/sendemail) module
+which the Lambda uses to send emails via AWS SES is **38 lines** of code. See:
+[lib/index.js](https://codecov.io/gh/dwyl/sendemail/src/master/lib/index.js)
+it's mostly comments which make it very beginner friendly.
