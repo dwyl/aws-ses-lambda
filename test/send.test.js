@@ -12,8 +12,8 @@ test('send a welcome email to the simulator', function (t) {
   handler(event, context, function(err, data){
     // console.log(err, data);
     // console.log(' - - - - - - - - ');
-    t.equal(data.MessageId.length, 60,
-        "Email sent! MessageId: " + data.MessageId)
+    t.equal(data.message_id.length, 60,
+        "Email sent! MessageId: " + data.message_id)
     t.end();
   })
 });
@@ -22,7 +22,7 @@ test('send email without template', function (t) {
   const event = { "email": "success@simulator.amazonses.com" }; // no template
   handler(event, context, function(err, data) {
     // console.log(data);
-    t.equal(data.MessageId.length, 60, "Sent! MessageId: " + data.MessageId)
+    t.equal(data.message_id.length, 60, "Sent! message_id: " + data.message_id);
     t.end();
   })
 });

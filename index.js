@@ -14,7 +14,7 @@ exports.handler = function handler (event, context, callback) {
       json.template = event.template;
       http_request(json, function http_cb (_status, response) { // save to API
         const merged = {...event, ...json, ...response};
-        return callback(e, merged);
+        return callback(error, merged);
       });
     });
   }

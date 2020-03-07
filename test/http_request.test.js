@@ -24,7 +24,7 @@ test('send data to Phoenix', function (t) {
     status: 'Sent'
   }
   http_request(json, function (status, response) {
-    console.log('status:', status, 'response:', response);
+    // console.log('status:', status, 'response:', response);
     t.equal(status, 200, "data successfully sent to Phoenix!");
     t.end();
   });
