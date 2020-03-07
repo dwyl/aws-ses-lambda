@@ -2,18 +2,21 @@ const test = require('tape');
 const handler = require('../index.js').handler;
 const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 
-test('send email without template', function (t) {
+test.only('send email to success simulator and save to API', function (t) {
   const event = {
     "email": "success@simulator.amazonses.com",
     "name": "Alex!",
     "subject": "my amazing subject!",
-    "key": "test"
+    "key": "test",
+    "template": "welcome",
+    "time":  Date.now().toString()
   };
-  handler(event, context, function (err, data) {
+  handler(event, context, function cb (err, data) {
     // console.log('event:', event);
     // console.log('err:', err);
-    // console.log('data:', data);
-    t.equal(data.MessageId.length, 60, "MessageId: " + data.MessageId);
+    console.log('data:', data);
+    t.equal(data.message_id.length, 60, "message_id: " + data.message_id);
+    t.equal(data.status, "Sent", "Status: " + data.status);
     t.end();
   })
 });
