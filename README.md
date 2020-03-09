@@ -112,7 +112,7 @@ Don't you just _love_ it when things are _that_ simple?! <br />
 All the data required for sending an email
 is received in the Lambda **`event`** object.
 
-The required keys in the `even` object are:
+The required keys in the `event` object are:
 + `email` - the email address we want to send an email to.
 + `name` - the name of the person we are sending the email to.
   (_if your email messages aren't personal, don't send them!_)
