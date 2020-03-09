@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:eu-west-1:123456789247:SESNotifications:efb916bb-1431-4fa3-9070-26b4cc115420",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "731cb327-2d34-528d-833e-e5f38f2d698d",
+        "TopicArn": "arn:aws:sns:eu-west-1:123456789247:SESNotifications",
+        "Subject": null,
+        "Message": "{\"notificationType\":\"Bounce\",\"bounce\":{\"bounceType\":\"Permanent\",\"bounceSubType\":\"OnAccountSuppressionList\",\"bouncedRecipients\":[{\"emailAddress\":\"bounce@dwyl.com\",\"action\":\"failed\",\"status\":\"5.1.1\",\"diagnosticCode\":\"Amazon SES did not send the message to this address because it is on the suppression list for your account. For more information about removing addresses from the suppression list, see the Amazon SES Developer Guide at https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-email-suppression-list.html\"}],\"timestamp\":\"2020-02-29T17:31:05.179Z\",\"feedbackId\":\"010201709200682d-59f64ce3-6e6a-4e3f-a48d-c9f9f2b924e0-000000\",\"reportingMTA\":\"dns; amazonses.com\"},\"mail\":{\"timestamp\":\"2020-02-29T17:31:05.179Z\",\"source\":\"hello@ademo.app\",\"sourceArn\":\"arn:aws:ses:eu-west-1:123456789247:identity/hello@ademo.app\",\"sourceIp\":\"34.247.165.191\",\"sendingAccountId\":\"123456789247\",\"messageId\":\"0102017092006798-f0456694-ac24-487b-9467-b79b8ce798f2-000000\",\"destination\":[\"bounce@dwyl.com\"],\"headersTruncated\":false,\"headers\":[{\"name\":\"From\",\"value\":\"hello@ademo.app\"},{\"name\":\"Reply-To\",\"value\":\"hello@ademo.app\"},{\"name\":\"To\",\"value\":\"bounce@dwyl.com\"},{\"name\":\"Subject\",\"value\":\"Welcome to dwyl Bouncerino\"},{\"name\":\"MIME-Version\",\"value\":\"1.0\"},{\"name\":\"Content-Type\",\"value\":\"multipart/alternative;  boundary=\\\"----=_Part_7127832_1654059516.1582997464986\\\"\"}],\"commonHeaders\":{\"from\":[\"hello@ademo.app\"],\"replyTo\":[\"hello@ademo.app\"],\"to\":[\"bounce@dwyl.com\"],\"subject\":\"Welcome to dwyl Bouncerino\"}}}",
+        "Timestamp": "2020-02-29T17:31:05.199Z",
+        "SignatureVersion": "1",
+        "Signature": "cOnptKPHCIW4x2iPsjGr7Oay74Br52VkrraMfsi+iqqKnKmqmYkNm04j7UoNaymn0cUUGURqByHdiyvVG+J9ADfQHdYtmOgStsi2I50cCNw68bATz0mDzQ9fIzOskV5uePW26z5yXlreuB+V4kA6NKygmlHPIbZ9UFWzTKjStAlxXqooh7c/KdlgZGtrYtgu74pRIdQIaagNJAMlDvhDnrf72fupvACHPgDKIOM9E70vMMziUNdC78bZ2lvl8j2JCKdAenO+uTBzxKj6DuUXCD95jJj4gGiYARGLK+nf3uE17RE7o4xDyjgiMYhob/gdRD1k2C5SiGBwm2RIDO7pwA==",
+        "SigningCertUrl": "https://sns.eu-west-1.amazonaws.com/SimpleNotificationService-a86cb10b4e1f29c941702d737128f7b6.pem",
+        "UnsubscribeUrl": "https://sns.eu-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:eu-west-1:123456789247:SESNotifications:efb916bb-1431-4fa3-9070-26b4cc115420",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}
