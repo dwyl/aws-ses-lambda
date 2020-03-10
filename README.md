@@ -11,7 +11,6 @@ and handles notifications for bounces, etc. 📈
 [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/aws-ses-lambda/master.svg?style=flat-square)](http://codecov.io/github/dwyl/aws-ses-lambda?branch=master)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/dwyl/aws-ses-lambda?color=brightgreen&style=flat-square)](https://codeclimate.com/github/dwyl/aws-ses-lambda)
 [![dependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda)
-[![devDependencies Status](https://david-dm.org/dwyl/aws-ses-lambda/dev-status.svg?style=flat-square)](https://david-dm.org/dwyl/aws-ses-lambda?type=dev)
 [![HitCount](http://hits.dwyl.com/dwyl/aws-ses-lambda.svg)](http://hits.dwyl.com/dwyl/aws-ses-lambda)
 [![npm package version](https://img.shields.io/npm/v/aws-ses-lambda.svg?color=brightgreen&style=flat-square)](https://www.npmjs.com/package/aws-ses-lambda)
 [![Node.js Version](https://img.shields.io/node/v/aws-ses-lambda.svg?style=flat-square "Only Node.js v12 LTS supported")](http://nodejs.org/download/)
