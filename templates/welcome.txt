@@ -9,7 +9,7 @@ including making time for what you love.
 https://github.com/dwyl/start-here/blob/master/manifesto.md
 
 If you have any questions or find any issues, big or small,
-please drop us a note or add an issue to github:
+please drop us a note or add an issue to GitHub:
 https://github.com/dwyl/app/labels/MVP
 We really appreciate your feedback!
 
