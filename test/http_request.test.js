@@ -29,3 +29,15 @@ test('send data to Phoenix', function (t) {
     t.end();
   });
 });
+
+
+test('make jwt', function (t) {
+  const json = {
+    id: 1
+  }
+  const token = jwt.sign(json, process.env.JWT_SECRET)
+  console.log('token:', token);
+  const decoded = jwt.decode(token);
+  t.equal(decoded.id, json.id, "id matches")
+  t.end();
+});

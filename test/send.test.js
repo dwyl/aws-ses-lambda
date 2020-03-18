@@ -7,7 +7,8 @@ test('send a welcome email to the simulator', function (t) {
     "template": "welcome",
     "email": "success@simulator.amazonses.com",
     "name": "Great Success!",
-    "subject": "my amazing subject!"
+    "subject": "my amazing subject!",
+    "id": 1
   };
   handler(event, context, function(err, data){
     // console.log(err, data);
@@ -19,7 +20,10 @@ test('send a welcome email to the simulator', function (t) {
 });
 
 test('send email without template', function (t) {
-  const event = { "email": "success@simulator.amazonses.com" }; // no template
+  const event = {
+    "email": "success@simulator.amazonses.com",
+    "id": 1
+  }; // no template
   handler(event, context, function(err, data) {
     // console.log(data);
     t.equal(data.message_id.length, 60, "Sent! message_id: " + data.message_id);
