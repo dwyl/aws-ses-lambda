@@ -33,7 +33,7 @@ test('send data to Phoenix', function (t) {
 
 test('make jwt', function (t) {
   const json = {
-    id: 1
+    id: 109
   }
   const token = jwt.sign(json, process.env.JWT_SECRET)
   console.log('token:', token);
