@@ -9,7 +9,7 @@ exports.handler = function handler (event, context, callback) {
 
   if (event.email) { // event contains an email (address)
   	send(event, function send_cb (error, data) { // send the email
-      const json = {...parse(data), ...event};
+      const json = {...event, ...parse(data)};
       http_request(json, function http_cb (_status, response) { // save to API
         const merged = {...json, ...response};
         return callback(error, merged);
