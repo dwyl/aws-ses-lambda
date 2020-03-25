@@ -51,27 +51,18 @@ The `aws-ses-lambda` function does three _related_ things<sup>1</sup>:
 The _How?_ section below explains
 how each of these functions works.
 
-This (ascii) diagram explains the context where `aws-ses-lambda` is used:
+This diagram explains the context where `aws-ses-lambda` is used:
 
-```
-The main App does not do any Email as that is is not it's core function.
-It delegates all email sending and monitoring activity to the aws-ses-lambda.
+![dwyl-app-services-diagram](https://user-images.githubusercontent.com/194400/77526292-41628180-6e82-11ea-8044-dacbc57ba895.png)
 
-┌─────┐  send   ┌────────────────┐
-| App | ───────>| aws-ses-lambda |─┐ The Lambda function Sends email
-└─────┘  email  └────────────────┘ | and handles SNS notifications
-                                   | for bounce events.
-  ┌───────┐    SNS Notification    |
-  | Email | <──────────────────────┘
-  |  App  |
-  └───────┘  
-  The Email Stats App aggregates and visualises email stats.
-  This allows us to be more data-driven in our communications.
-  And understand exactly who is engaged with the app.
+[Edit this diagram](https://docs.google.com/presentation/d/1PUKzbRQOEgHaOmaEheU7T3AHQhRT8mhGuqVKotEJkM0/edit?usp=sharing)
 
-  This is not a full on  it's just an attempt to make email
-  sending/monitoring separate so our App can focus on core features.
-```
+The Email App receives requests from the Auth App
+and and triggers the `aws-ses-lambda` function.
+
+The `aws-ses-lambda` function Sends email
+and handles SNS notifications
+SNS Notification for bounce events.
 
 
 ## _How_?
@@ -124,7 +115,7 @@ It works flawlessly.
 
 
 The full code is:
-[`lib/send.js`](https://codecov.io/gh/dwyl/aws-ses-lambda/src/master/lib/send.js)
+[`lib/send.js`](https://github.com/dwyl/aws-ses-lambda/blob/master/lib/send.js#L21)
 
 
 
@@ -159,7 +150,7 @@ if(event && event.Records && event.Records.length > 0) {
 
 We are only interested in the `messageId` and `notificationType`.
 This code is included in
-[`lib/parse.js`](https://github.com/dwyl/aws-ses-lambda/blob/master/lib/parse.js)
+[`lib/parse.js`](https://github.com/dwyl/aws-ses-lambda/blob/master/lib/parse.js#L16)
 
 
 During MVP we are only interested in the emails that _bounce_.
