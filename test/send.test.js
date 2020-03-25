@@ -1,5 +1,6 @@
 const test = require('tape');
 const handler = require('../index.js').handler;
+const send = require("../lib/send.js");
 const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 
 test('send a welcome email to the simulator', function (t) {
@@ -27,6 +28,23 @@ test('send email without template', function (t) {
   handler(event, context, function(err, data) {
     // console.log(data);
     t.equal(data.message_id.length, 60, "Sent! message_id: " + data.message_id);
+    t.end();
+  })
+});
+
+test('simulate bounce and complaint', function (t) {
+  const event = {
+    "email": [
+      "success@simulator.amazonses.com",
+      "complaint@simulator.amazonses.com"
+    ],
+    "template": "simulator",
+    "name": "Testy McTestface",
+    "id": 1
+  }; // no template
+  send(event, function(err, data) {
+    // console.log(data);
+    t.equal(data.MessageId.length, 60, "Sent! message_id: " + data.message_id);
     t.end();
   })
 });
