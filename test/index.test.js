@@ -2,6 +2,15 @@ const test = require('tape');
 const handler = require('../index.js').handler;
 const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 
+test('ping to warm up lambda function', function (t) {
+  const event = {ping: Date.now()};
+  handler(event, context, function (error, data) {
+    t.equal(data, event, "event returned without modification");
+    t.end();
+  })
+});
+
+
 test('send email to success simulator and save to API', function (t) {
   const event = {
     "email": "success@simulator.amazonses.com",
