@@ -20,7 +20,7 @@ test('send a welcome email to the simulator', function (t) {
   })
 });
 
-test('send email without template', function (t) {
+test('send email without template or name', function (t) {
   const event = {
     "email": "success@simulator.amazonses.com",
     "id": 1
