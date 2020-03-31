@@ -258,10 +258,12 @@ Enable debugging by setting the `NODE_ENV=test` environment variable.
 
 Now the _latest_ `event` will be saved to:
 https://ademoapp.s3.eu-west-1.amazonaws.com/event.json
+
 ![image](https://user-images.githubusercontent.com/194400/78031698-cd314d80-735b-11ea-85b3-b7645f3e4c2a.png)
 
 And SNS messages are saved to:
 https://ademoapp.s3.eu-west-1.amazonaws.com/sns.json
+
 ![image](https://user-images.githubusercontent.com/194400/78031940-24372280-735c-11ea-878f-d0fe2f4d2415.png)
 
 
