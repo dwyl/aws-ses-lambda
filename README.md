@@ -249,6 +249,22 @@ Ensure you follow all the instructions in
 to get the SNS Topic to trigger the Lambda function for SES notifications.
 
 
+### Debugging
+
+
+Enable debugging by setting the `NODE_ENV=test` environment variable.
+
+<img width="821" alt="NODE_ENV=test" src="https://user-images.githubusercontent.com/194400/78032144-75dfad00-735c-11ea-8eac-681bb2a3da9a.png">
+
+Now the _latest_ `event` will be saved to:
+https://ademoapp.s3.eu-west-1.amazonaws.com/event.json
+![image](https://user-images.githubusercontent.com/194400/78031698-cd314d80-735b-11ea-85b3-b7645f3e4c2a.png)
+
+And SNS messages are saved to:
+https://ademoapp.s3.eu-west-1.amazonaws.com/sns.json
+![image](https://user-images.githubusercontent.com/194400/78031940-24372280-735c-11ea-878f-d0fe2f4d2415.png)
+
+
 
 <br /> <br /> <br />
 
