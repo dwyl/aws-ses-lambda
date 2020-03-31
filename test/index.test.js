@@ -3,7 +3,7 @@ const handler = require('../index.js').handler;
 const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 
 test('ping to warm up lambda function', function (t) {
-  const event = {ping: Date.now()};
+  const event = {ping: Date.now(), key: "ping"};
   handler(event, context, function (error, data) {
     t.equal(data, event, "event returned without modification");
     t.end();

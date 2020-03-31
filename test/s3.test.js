@@ -5,7 +5,7 @@ const context = require('aws-lambda-test-utils').mockContextCreator({}, test);
 
 test('save event data to S3 with callback', function (t) {
   const time = Date.now().toString();
-  const event = {"hello":"world!", "time": time};
+  const event = {"hello":"world!", time: time};
   save(event, function(error, data) {
     // console.log('error:', error);
     // console.log('data (event):', data);
@@ -20,10 +20,11 @@ test('save event data to S3 with callback', function (t) {
 });
 
 test('save event data to S3 without callback', function (t) {
-  const event = require('./fixtures/sample_sns_bounce.json');
+  let event = require('./fixtures/sample_sns_bounce.json');
+  event.key = "without_callabck"
   save(event);
   setTimeout(function delay () {
-    get('event.json', function(error2, data2) {
+    get('without_callabck.json', function(error2, data2) {
       // console.log(' - - - - get:');
       // console.log(error2, data2);
       t.deepEqual(event, data2, "event saved and retrieved! " + data2.time);

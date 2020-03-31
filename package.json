@@ -1,6 +1,6 @@
 {
   "name": "aws-ses-lambda",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A complete solution for sending email via AWS SES using Lambda",
   "main": "lib/index.js",
   "scripts": {

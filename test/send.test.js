@@ -9,7 +9,8 @@ test('send a welcome email to the simulator', function (t) {
     "email": "success@simulator.amazonses.com",
     "name": "Great Success!",
     "subject": "my amazing subject!",
-    "id": 1
+    "id": 1,
+    "key": "welcome_test"
   };
   handler(event, context, function(err, data){
     // console.log(err, data);
@@ -23,7 +24,8 @@ test('send a welcome email to the simulator', function (t) {
 test('send email without template or name', function (t) {
   const event = {
     "email": "success@simulator.amazonses.com",
-    "id": 1
+    "id": 1,
+    "key": "no_template"
   }; // no template
   handler(event, context, function(err, data) {
     // console.log(data);
@@ -40,7 +42,8 @@ test('simulate bounce and complaint', function (t) {
     ],
     "template": "simulator",
     "name": "Testy McTestface",
-    "id": 1
+    "id": 1,
+    "key": "simulate_bounce"
   }; // no template
   send(event, function(err, data) {
     // console.log(data);

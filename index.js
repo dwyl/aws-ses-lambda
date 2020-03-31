@@ -20,7 +20,7 @@ exports.handler = function handler (event, context, callback) {
     });
   }
   else {
-    const json = parse(event); // parse sns event
+    const json = {...event, ...parse(event)}; // parse sns event
     return http_request(json, callback); // POST parsed data to Email App
   }
 }
