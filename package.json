@@ -51,7 +51,7 @@
     "tape": "^4.13.2"
   },
   "dependencies": {
-    "aws-sdk": "^2.626.0",
+    "aws-sdk": "^2.649.0",
     "env2": "^2.2.2",
     "sendemail": "^4.0.0",
     "jsonwebtoken": "^8.5.1"
