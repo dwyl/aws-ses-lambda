@@ -21,9 +21,9 @@ test('send email to success simulator and save to API', function (t) {
     "time":  Date.now().toString()
   };
   handler(event, context, function cb (err, data) {
-    // console.log('event:', event);
-    // console.log('err:', err);
-    // console.log('data:', data);
+    console.log('event:', event);
+    console.log('err:', err);
+    console.log('data:', data);
     t.equal(data.message_id.length, 60, "message_id: " + data.message_id);
     t.equal(data.status, "Sent", "Status: " + data.status);
     t.end();

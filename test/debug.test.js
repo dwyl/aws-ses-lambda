@@ -4,16 +4,33 @@ const get = require('../lib/s3.js').get;
 
 test('save event data to S3 without callback', function (t) {
   const time = Date.now().toString();
-  const event = {"Bonjour":"le monde!", "time": time};
+  let event = {"Bonjour":"le monde!", time: time, key: "event_test"};
   process.env.NODE_ENV="test";
   debug(event);
   setTimeout(function delay (){
-    get('event.json', function(error2, data2) {
+    get('event_test.json', function(error2, data2) {
       // console.log(' - - - - get:');
       // console.log(error2, data2);
       t.deepEqual(event, data2, "event saved and retrieved! " + data2.time);
       process.env.NODE_ENV=null;
       t.end();
     });
-  }, 2000);
+  }, 3000);
+});
+
+test('debug sns event', function (t) {
+  let event = require('./fixtures/sample_sns_bounce.json');
+  event.key = "debug_sns"
+  event.time = Date.now().toString();
+  process.env.NODE_ENV="test";
+  debug(event);
+  setTimeout(function delay (){
+    get('debug_sns.json', function(error2, data2) {
+      // console.log(' - - - - get:');
+      // console.log(error2, data2);
+      t.deepEqual(event, data2, "event saved and retrieved! " + data2.time);
+      process.env.NODE_ENV=null;
+      t.end();
+    });
+  }, 3000);
 });
