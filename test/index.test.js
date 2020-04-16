@@ -41,3 +41,17 @@ test('POST sns event to Phoenix App via index.handler', function (t) {
     t.end();
   })
 });
+
+test('avoid sending email to addresses on the bounce list', function (t) {
+  const event = {
+    "email": "test@gmail.com",
+    "name": "Alex McTesting!",
+    "subject": "my amazing subject!",
+    "key": "test",
+    "time":  Date.now().toString()
+  };
+  handler(event, context, function (error, data) {
+    t.equal(data, event, "event returned without modification");
+    t.end();
+  })
+});
