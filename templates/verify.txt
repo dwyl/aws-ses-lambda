@@ -1,0 +1,16 @@
+Hi!
+
+Thank you for signing up to alpha test dwyl with your
+email address: {{email}}!
+
+Please follow this link to verify your address:
+{{link}}.
+
+If you have any questions or find any issues, big or small,
+please drop us a note or add an issue to GitHub:
+https://github.com/dwyl/app/labels/MVP
+We really appreciate your feedback!
+
+Inês & Nelson
+Co-Founders
+http://www.dwyl.com

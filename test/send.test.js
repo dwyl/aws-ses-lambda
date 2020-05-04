@@ -51,3 +51,22 @@ test('simulate bounce and complaint', function (t) {
     t.end();
   })
 });
+
+test('simulate verification email', function (t) {
+  const event = {
+    "email": [
+      "success@simulator.amazonses.com",
+      // "nelson@dwyl.com"
+    ],
+    "template": "verify",
+    "name": "Testy McTestface",
+    "id": 1,
+    "key": "simulate_verify",
+    "link": "https://dwyl.com/person/verify/StTqXEQ2l-Y"
+  }; // no template
+  send(event, function(err, data) {
+    console.log(data);
+    t.equal(data.MessageId.length, 60, "Sent! message_id: " + data.MessageId);
+    t.end();
+  })
+});
