@@ -61,8 +61,7 @@ The Email App receives requests from the Auth App
 and and triggers the `aws-ses-lambda` function.
 
 The `aws-ses-lambda` function Sends email
-and handles SNS notifications
-SNS Notification for bounce events.
+and handles SNS notifications for bounce events.
 
 
 ## _How_?
