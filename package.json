@@ -54,7 +54,7 @@
     "aws-sdk": "^2.649.0",
     "env2": "^2.2.2",
     "sendemail": "^4.0.0",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^9.0.0"
   },
   "engines": {
     "node": ">=12.5.0"
